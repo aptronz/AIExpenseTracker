@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="loginstyle.css">
+</head>
+
+<body class="loginPage">
+
+<div class="loginContainer">
+
+  <!-- LEFT SIDE -->
+  <div class="loginLeft">
+      <h1>💰 AI Expense Tracker</h1>
+      <p>Track • Save • Grow your money with AI</p>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="loginRight">
+      <div class="formBox">
+        <h2>Welcome 👋</h2>
+
+        <input id="name" placeholder="Full Name">
+        <input id="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+        <button class="signupBtn" onclick="register()">Create Account</button>
+
+        <p id="msg"></p>
+      </div>
+  </div>
+
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>
