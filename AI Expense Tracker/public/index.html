@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Finance Tracker - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login/Register — split: brand left, credentials right -->
+        <div id="auth-page" class="auth-split">
+            <aside class="auth-brand-panel" aria-label="Product">
+                <div class="auth-brand-decor" aria-hidden="true"></div>
+                <div class="auth-brand-inner">
+                    <div class="auth-brand-icon" aria-hidden="true">💰</div>
+                    <h1 class="auth-brand-title">AI Finance Tracker</h1>
+                    <p class="auth-brand-tagline">Track income, expenses, and savings — with smart insights to help you plan ahead.</p>
+                    <ul class="auth-brand-points">
+                        <li>Secure login &amp; dashboard</li>
+                        <li>Fixed bills, subscriptions &amp; variable spend</li>
+                        <li>AI tips for saving &amp; investing</li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="auth-form-panel">
+                <div class="auth-form-inner">
+                    <h2 class="auth-form-heading" id="auth-form-heading">Welcome back</h2>
+                    <p class="auth-form-sub" id="auth-form-sub">Sign in with your email and password.</p>
+                    <div class="auth-tabs">
+                        <button type="button" class="tab-btn active" data-tab="login">Login</button>
+                        <button type="button" class="tab-btn" data-tab="register">Register</button>
+                    </div>
+
+                    <form id="login-form" class="auth-form active">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="you@example.com" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+
+                    <form id="register-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-username">Username</label>
+                            <input type="text" id="register-username" placeholder="Choose a username" required autocomplete="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" placeholder="you@example.com" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" placeholder="Create a password" required autocomplete="new-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+
+                    <div id="auth-error" class="error-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="dashboard-container hidden">
+            <header class="dashboard-header">
+                <h1>💰 AI Finance Tracker</h1>
+                <div class="user-info">
+                    <span id="username-display"></span>
+                    <button id="logout-btn" class="btn btn-secondary">Logout</button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="summary-card income-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                            <h3>Total Income</h3>
+                            <span style="font-size: 2rem;">💰</span>
+                        </div>
+                        <p class="amount" id="total-income">Rs 0.00</p>
+                    </div>
+                    <div class="summary-card expense-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                            <h3>Total Expenses</h3>
+                            <span style="font-size: 2rem;">💸</span>
+                        </div>
+                        <p class="amount" id="total-expenses">Rs 0.00</p>
+                    </div>
+                    <div class="summary-card fixed-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                            <h3>Fixed Expenses</h3>
+                            <span style="font-size: 2rem;">📌</span>
+                        </div>
+                        <p class="amount" id="fixed-expenses">Rs 0.00</p>
+                    </div>
+                    <div class="summary-card balance-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                            <h3>Balance</h3>
+                            <span style="font-size: 2rem;">⚖️</span>
+                        </div>
+                        <p class="amount" id="balance">Rs 0.00</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="add-income-btn" class="btn btn-success">💰 Add Income</button>
+                    <button id="add-expense-btn" class="btn btn-danger">💸 Add Expense</button>
+                </div>
+
+                <!-- Fixed & recurring expenses (rent, subscriptions, etc.) -->
+                <section class="section fixed-expenses-section">
+                    <h2>📌 Fixed & recurring expenses</h2>
+                    <p class="fixed-section-desc">Regular payments: <strong>rent</strong>, <strong>subscriptions</strong> (Netflix, Spotify), <strong>utilities</strong>, <strong>EMI</strong>, <strong>insurance</strong>, and similar. Use the shortcuts below or add an expense and tick <em>Fixed expense</em>.</p>
+                    <div class="fixed-quick-add" role="group" aria-label="Quick add fixed expense type">
+                        <span class="fixed-quick-label">Quick add:</span>
+                        <button type="button" class="btn-quick-fixed" data-cat="Rent" data-desc="Monthly rent / housing">🏠 Rent</button>
+                        <button type="button" class="btn-quick-fixed" data-cat="Subscriptions" data-desc="Streaming, apps, memberships">📺 Subscriptions</button>
+                        <button type="button" class="btn-quick-fixed" data-cat="Utilities" data-desc="Electricity, water, gas">💡 Utilities</button>
+                        <button type="button" class="btn-quick-fixed" data-cat="Internet / mobile" data-desc="Broadband, postpaid">📶 Internet / mobile</button>
+                        <button type="button" class="btn-quick-fixed" data-cat="Insurance" data-desc="Health, vehicle, life">🛡️ Insurance</button>
+                        <button type="button" class="btn-quick-fixed" data-cat="EMI / Loan" data-desc="Loan installment">🏦 EMI / Loan</button>
+                        <button type="button" class="btn-quick-fixed" data-cat="Gym / fitness" data-desc="Gym or fitness subscription">💪 Gym</button>
+                    </div>
+                    <div id="fixed-expenses-summary" class="fixed-expenses-summary hidden">
+                        <span class="fixed-summary-label">Total fixed (listed below)</span>
+                        <span class="fixed-summary-amount" id="fixed-expenses-monthly-total">Rs 0.00</span>
+                    </div>
+                    <div id="fixed-expenses-list" class="list-container fixed-expenses-list"></div>
+                </section>
+
+                <!-- AI Savings & Insights Panel -->
+                <section class="section ai-savings-panel" id="ai-savings-section">
+                    <h2>🤖 AI: Where you can save money</h2>
+                    <p class="ai-savings-intro">Personalised tips from your income, expenses, and spending patterns.</p>
+                    <div id="ai-prediction-banner" class="ai-prediction-banner hidden"></div>
+                    <p class="ai-tips-subheading">Spending overview</p>
+                    <ul id="ai-insights-list" class="ai-tips-list"></ul>
+                    <p class="ai-tips-subheading">Where to save money</p>
+                    <ul id="ai-savings-list" class="ai-tips-list ai-savings-list"></ul>
+                    <div id="ai-invest-banner" class="ai-invest-banner hidden"></div>
+                    <p class="ai-tips-subheading">Where to invest (SIP, mutual funds &amp; more)</p>
+                    <p class="ai-invest-disclaimer">Based on your <strong>average monthly savings</strong> from logged data. Educational only — not financial advice.</p>
+                    <ul id="ai-invest-list" class="ai-tips-list ai-invest-list"></ul>
+                </section>
+
+                <!-- Income Section -->
+                <section class="section">
+                    <h2>📈 Income History</h2>
+                    <div id="income-list" class="list-container"></div>
+                </section>
+
+                <!-- Variable / one-off expenses -->
+                <section class="section">
+                    <h2>📉 Other expenses</h2>
+                    <p class="section-subtitle">One-off and variable spending (food, transport, shopping — not marked as fixed).</p>
+                    <div id="expenses-list" class="list-container"></div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Modal for Add Income -->
+        <div id="income-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>💰 Add Income</h2>
+                <form id="income-form">
+                    <div class="form-group">
+                        <label for="income-source">Source</label>
+                        <input type="text" id="income-source" placeholder="e.g., Salary, Freelance" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-amount">Amount (Rs)</label>
+                        <input type="number" id="income-amount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-description">Description (Optional)</label>
+                        <textarea id="income-description" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Income</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal for Add Expense -->
+        <div id="expense-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>💸 Add Expense</h2>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label for="expense-category">Category <span style="color: #667eea; font-size: 0.85rem;">(AI Auto-suggest available)</span></label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="expense-category" placeholder="e.g., Rent, Food, Transport">
+                            <button type="button" id="ai-suggest-btn" class="btn" style="width: auto; padding: 14px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; white-space: nowrap;">🤖 AI Suggest</button>
+                        </div>
+                        <small id="ai-suggestion-text" style="color: #10b981; margin-top: 5px; display: none;"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-amount">Amount (Rs)</label>
+                        <input type="number" id="expense-amount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-description">Description <span style="color: #667eea; font-size: 0.85rem;">(AI uses this for categorization)</span></label>
+                        <textarea id="expense-description" rows="3" placeholder="Enter expense description for AI categorization"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="expense-fixed">
+                            <span><strong>Fixed / recurring</strong> — rent, subscriptions, bills, EMI (shows in Fixed section)</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Add Expense</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
